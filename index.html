@@ -73,15 +73,110 @@
             left: 30px;  
             top: -35px;  
             font-size: 54px; 
+            color: #F5F5F5;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        .contador {
-            background-color: #c5e1a5; 
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
+        /* --- NOVO CONTADOR ESTILIZADO --- */
+        .love-counter {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            width: 90%;
+            max-width: 600px;
             margin: 20px auto;
-            width: 300px;
+            box-shadow: 
+                0 10px 30px rgba(197, 225, 165, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        
+        .counter-title {
+            font-size: 1.5rem;
+            color: #4a4a4a;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .counter-grid {
+            display: flex;
+            justify-content: space-around;
+            gap: 15px;
+        }
+        
+        .counter-item {
+            position: relative;
+            flex: 1;
+        }
+        
+        .counter-value {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #81c784, #4caf50);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            height: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.6s ease;
+        }
+        
+        .counter-value::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            z-index: -1;
+            transform: perspective(200px) rotateX(20deg);
+        }
+        
+        .counter-label {
+            margin-top: 10px;
+            color: #666;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .counter-icon {
+            width: 16px;
+            height: 16px;
+            fill: #4caf50;
+        }
+        
+        .counter-message {
+            margin-top: 20px;
+            font-style: italic;
+            color: #81c784;
+            font-size: 0.9rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.5s ease;
+        }
+        
+        @media (max-width: 600px) {
+            .counter-grid {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .counter-value {
+                font-size: 2rem;
+                height: 3rem;
+            }
         }
 
         .section {
@@ -92,7 +187,7 @@
             color: #333;
         }
 
-        /* --- NOVA TIMELINE --- */
+        /* --- TIMELINE --- */
         .timeline {
             position: relative;
             max-width: 800px;
@@ -171,7 +266,6 @@
             color: #4caf50;
         }
 
-        /* Responsividade */
         @media (max-width: 768px) {
             .timeline::before {
                 left: 20px;
@@ -193,6 +287,84 @@
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
+
+        /* --- MINIGAME --- */
+        #minigame {
+            background-color: #f5f5f5 !important;
+        }
+
+        .memory-game {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            background: #c5e1a5;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+
+        .memory-card.flip {
+            transform: rotateY(180deg);
+        }
+
+        .front-face, .back-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+        }
+
+        .front-face {
+            background: white;
+            transform: rotateY(180deg);
+            padding: 10px;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .front-face img {
+            max-width: 90%;
+            max-height: 70%;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        .back-face {
+            background: linear-gradient(45deg, #81c784, #4caf50);
+            color: white;
+            font-size: 2em;
+        }
+
+        #reset-game {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        #reset-game:hover {
+            background: #388e3c;
+        }
     </style>
 </head>
 <body>
@@ -204,6 +376,7 @@
             <a href="#fotos">Fotos</a>
             <a href="#musicas">Músicas</a>
             <a href="#mensagens">Mensagens</a>
+            <a href="#minigame">Minigame</a>
         </div>
         <div class="linha"></div>
     </div>
@@ -214,9 +387,49 @@
 
     <div id="datas" class="section">
         <h2>Datas Especiais</h2>
-        <div class="contador">
-            <h3 style="font-weight: bold; color: black;">Estamos juntos há:</h3>
-            <p id="relacionamento" style="color: black;">0 anos, 0 meses, 0 dias</p>
+        
+        <!-- NOVO CONTADOR ESTILIZADO -->
+        <div class="love-counter">
+            <div class="counter-title">Nossa Jornada</div>
+            
+            <div class="counter-grid">
+                <!-- Anos -->
+                <div class="counter-item">
+                    <div class="counter-value" id="counter-years">00</div>
+                    <div class="counter-label">
+                        <svg class="counter-icon" viewBox="0 0 24 24">
+                            <path d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,20c-4.42,0-8-3.58-8-8s3.58-8,8-8s8,3.58,8,8 S16.42,20,12,20z"/>
+                            <path d="M13,7h-2v6l5,3l-1,2l-6-3V7z"/>
+                        </svg>
+                        Anos
+                    </div>
+                </div>
+                
+                <!-- Meses -->
+                <div class="counter-item">
+                    <div class="counter-value" id="counter-months">00</div>
+                    <div class="counter-label">
+                        <svg class="counter-icon" viewBox="0 0 24 24">
+                            <path d="M19,4h-1V2h-2v2H8V2H6v2H5C3.9,4,3,4.9,3,6v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V6C21,4.9,20.1,4,19,4z M19,20H5V10h14V20z"/>
+                        </svg>
+                        Meses
+                    </div>
+                </div>
+                
+                <!-- Dias -->
+                <div class="counter-item">
+                    <div class="counter-value" id="counter-days">00</div>
+                    <div class="counter-label">
+                        <svg class="counter-icon" viewBox="0 0 24 24">
+                            <path d="M11.99,2C6.47,2,2,6.48,2,12s4.47,10,9.99,10C17.52,22,22,17.52,22,12S17.52,2,11.99,2z M12,20c-4.42,0-8-3.58-8-8 s3.58-8,8-8s8,3.58,8,8S16.42,20,12,20z"/>
+                            <path d="M12.5,7H11v6l5.25,3.15l0.75-1.23l-4.5-2.67V7z"/>
+                        </svg>
+                        Dias
+                    </div>
+                </div>
+            </div>
+            
+            <div class="counter-message" id="counter-message"></div>
         </div>
 
         <div class="timeline">
@@ -273,7 +486,67 @@
         <h2>Mensagens</h2>
     </div>
 
+    <!-- MINIGAME -->
+    <div id="minigame" class="section">
+        <h2>Jogo do Nosso Amor</h2>
+        <p>Combine os pares para revelar nossas memórias especiais! ❤️</p>
+        
+        <div class="memory-game">
+            <!-- Cartas (substitua pelas suas fotos e momentos) -->
+            <div class="memory-card" data-framework="beijo">
+                <div class="front-face">
+                    <img src="https://i.imgur.com/placeholder1.jpg" alt="Nosso primeiro beijo">
+                    <span>Primeiro Beijo</span>
+                </div>
+                <div class="back-face">💋</div>
+            </div>
+            <div class="memory-card" data-framework="beijo">
+                <div class="front-face">01/08/2023</div>
+                <div class="back-face">📅</div>
+            </div>
+            
+            <div class="memory-card" data-framework="encontro">
+                <div class="front-face">
+                    <img src="https://i.imgur.com/placeholder2.jpg" alt="Nosso primeiro encontro">
+                    <span>Primeiro Encontro</span>
+                </div>
+                <div class="back-face">☕</div>
+            </div>
+            <div class="memory-card" data-framework="encontro">
+                <div class="front-face">15/07/2023</div>
+                <div class="back-face">❤️</div>
+            </div>
+            
+            <div class="memory-card" data-framework="viagem">
+                <div class="front-face">
+                    <img src="https://i.imgur.com/placeholder3.jpg" alt="Nossa primeira viagem">
+                    <span>Primeira Viagem</span>
+                </div>
+                <div class="back-face">✈️</div>
+            </div>
+            <div class="memory-card" data-framework="viagem">
+                <div class="front-face">10/10/2023</div>
+                <div class="back-face">🌴</div>
+            </div>
+            
+            <div class="memory-card" data-framework="musica">
+                <div class="front-face">
+                    <img src="https://i.imgur.com/placeholder4.jpg" alt="Nossa música">
+                    <span>Nossa Música</span>
+                </div>
+                <div class="back-face">🎵</div>
+            </div>
+            <div class="memory-card" data-framework="musica">
+                <div class="front-face">"Perfect" - Ed Sheeran</div>
+                <div class="back-face">🎶</div>
+            </div>
+        </div>
+
+        <button id="reset-game">Recomeçar Jogo</button>
+    </div>
+
     <script>
+        // Função para calcular o tempo
         function calcularTempoDesde(dataInicial) {
             const hoje = new Date();
             const inicio = new Date(dataInicial);
@@ -291,19 +564,68 @@
                 meses += 12;
             }
 
-            return { anos, meses, dias };
+            return { 
+                anos: anos,
+                meses: meses,
+                dias: dias,
+                horas: hoje.getHours(),
+                minutos: hoje.getMinutes(),
+                segundos: hoje.getSeconds()
+            };
         }
 
+        // Animação do contador
+        function animateCounter(id, newValue) {
+            const element = document.getElementById(id);
+            const currentValue = parseInt(element.textContent) || 0;
+            
+            if (currentValue !== newValue) {
+                element.style.transform = 'rotateX(90deg)';
+                setTimeout(() => {
+                    element.textContent = newValue.toString().padStart(2, '0');
+                    element.style.transform = 'rotateX(0deg)';
+                }, 300);
+            }
+        }
+
+        // Mensagens aleatórias
+        function updateCounterMessage(resultado) {
+            const messages = [
+                "Cada segundo contigo é especial 💖",
+                "Nosso amor só cresce com o tempo 🌱",
+                `${resultado.dias} dias de pura felicidade ✨`,
+                "Contando cada momento ao seu lado 📅",
+                "Tempo é relativo quando estamos juntos ⏳"
+            ];
+            
+            const messageElement = document.getElementById('counter-message');
+            messageElement.textContent = messages[Math.floor(Math.random() * messages.length)];
+            messageElement.style.opacity = '1';
+            messageElement.style.transform = 'translateY(0)';
+            
+            setTimeout(() => {
+                messageElement.style.opacity = '0';
+                messageElement.style.transform = 'translateY(10px)';
+            }, 3000);
+        }
+
+        // Atualizar contador completo
         function atualizarContador() {
             const resultado = calcularTempoDesde('2023-07-01');
-            document.getElementById('relacionamento').innerText = `${resultado.anos} anos, ${resultado.meses} meses, ${resultado.dias} dias`;
+            
+            animateCounter('counter-years', resultado.anos);
+            animateCounter('counter-months', resultado.meses);
+            animateCounter('counter-days', resultado.dias);
+            
+            updateCounterMessage(resultado);
         }
 
+        // Linha animada do menu
         window.addEventListener('scroll', function() {
             const bdt = document.getElementById('bdt');
             bdt.style.backgroundColor = window.scrollY > 0 ? 'black' : 'rgba(0, 0, 0, 0)';
 
-            const sections = ['home', 'datas', 'fotos', 'musicas', 'mensagens'];
+            const sections = ['home', 'datas', 'fotos', 'musicas', 'mensagens', 'minigame'];
             const linha = document.querySelector('.linha');
             sections.forEach(section => {
                 const elem = document.getElementById(section);
@@ -316,9 +638,95 @@
             });
         });
 
+        // Minigame - Jogo da Memória
         document.addEventListener('DOMContentLoaded', () => {
+            // Inicializa contador
             atualizarContador();
-            setInterval(atualizarContador, 86400000);
+            setInterval(atualizarContador, 1000);
+
+            // Configuração do jogo
+            const cards = document.querySelectorAll('.memory-card');
+            let hasFlippedCard = false;
+            let lockBoard = false;
+            let firstCard, secondCard;
+            let matchedPairs = 0;
+
+            function flipCard() {
+                if (lockBoard) return;
+                if (this === firstCard) return;
+
+                this.classList.add('flip');
+
+                if (!hasFlippedCard) {
+                    hasFlippedCard = true;
+                    firstCard = this;
+                    return;
+                }
+
+                secondCard = this;
+                checkForMatch();
+            }
+
+            function checkForMatch() {
+                let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+                
+                if (isMatch) {
+                    disableCards();
+                    matchedPairs++;
+                    checkGameCompletion();
+                } else {
+                    unflipCards();
+                }
+            }
+
+            function disableCards() {
+                firstCard.removeEventListener('click', flipCard);
+                secondCard.removeEventListener('click', flipCard);
+                resetBoard();
+            }
+
+            function unflipCards() {
+                lockBoard = true;
+                setTimeout(() => {
+                    firstCard.classList.remove('flip');
+                    secondCard.classList.remove('flip');
+                    resetBoard();
+                }, 1000);
+            }
+
+            function resetBoard() {
+                [hasFlippedCard, lockBoard] = [false, false];
+                [firstCard, secondCard] = [null, null];
+            }
+
+            function checkGameCompletion() {
+                if (matchedPairs === cards.length / 2) {
+                    setTimeout(() => {
+                        alert("Parabéns, amor! Você lembra de cada detalhe da nossa história 💖");
+                    }, 500);
+                }
+            }
+
+            function shuffleCards() {
+                cards.forEach(card => {
+                    let randomPos = Math.floor(Math.random() * cards.length);
+                    card.style.order = randomPos;
+                });
+            }
+
+            // Inicializa o jogo
+            shuffleCards();
+            cards.forEach(card => card.addEventListener('click', flipCard));
+
+            // Botão de reset
+            document.getElementById('reset-game').addEventListener('click', () => {
+                cards.forEach(card => {
+                    card.classList.remove('flip');
+                    card.addEventListener('click', flipCard);
+                });
+                matchedPairs = 0;
+                setTimeout(shuffleCards, 500);
+            });
         });
     </script>
 </body>
