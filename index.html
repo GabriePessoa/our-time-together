@@ -122,6 +122,15 @@
             display: block; /* Exibe cada detalhe em uma nova linha */
             font-size: 14px; /* Tamanho do texto */
         }
+
+        /* Novo estilo para o player do Spotify */
+        .spotify-player {
+            margin: 30px auto;
+            max-width: 600px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -182,6 +191,17 @@
 
     <div id="musicas" class="section">
         <h2>Músicas</h2>
+        <!-- Player do Spotify - Substitua o link pela sua playlist -->
+        <div class="spotify-player">
+            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4WYpdgoIcn6" 
+                    width="100%" 
+                    height="380" 
+                    frameborder="0" 
+                    allowtransparency="true" 
+                    allow="encrypted-media"
+                    style="border-radius: 12px;">
+            </iframe>
+        </div>
     </div>
 
     <div id="mensagens" class="section">
