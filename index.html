@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Tempo Juntos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif; 
+            color: #FFFFFF; 
+            overflow-x: hidden; 
+        }
+
+        #bdt {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px; 
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        .logo {
+            font-weight: bold;
+            color: white;
+            font-size: 30px;
+            position: absolute;
+            left: 20px;
+        }
+
+        #bdt a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px; 
+            transition: transform 0.2s ease;
+            font-weight: normal;
+            position: relative;
+        }
+
+        #bdt a:hover {
+            transform: scale(1.2);
+            font-weight: bold;
+        }
+
+        .linha {
+            height: 4px;
+            background-color: lightgreen;
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            transition: left 0.3s ease, width 0.3s ease;
+        }
+
+        #home {
+            background: url('https://wedy-assets.s3-sa-east-1.amazonaws.com/covers/website.jpg') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: flex-start; 
+            align-items: flex-end; 
+            padding: 20px; 
+            transition: opacity 0.5s ease;
+        }
+
+        h1 {
+            margin: 0; 
+            position: relative;
+            left: 30px;  
+            top: -35px;  
+            font-size: 54px; 
+        }
+
+        .contador {
+            background-color: #c5e1a5; 
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px auto;
+            width: 300px;
+        }
+
+        .section {
+            height: 100vh;
+            background-color: white;
+            text-align: center; 
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0; /* Espaço acima e abaixo da linha do tempo */
+        }
+
+        .card {
+            background-color: #c5e1a5; /* Mesma cor do contador */
+            border-radius: 10px;
+            width: 120px; /* Largura dos cards */
+            height: 200px; /* Altura dos cards */
+            margin: 0 20px; /* Espaçamento entre os cards */
+            padding: 10px;
+            position: relative; /* Para o posicionamento do semicírculo */
+            color: black; /* Cor da fonte preta para os cards */
+            transition: transform 0.3s, background-color 0.3s, color 0.3s; /* Efeito de transição */
+        }
+
+        .card:hover {
+            transform: scale(1.05); /* Aumenta o tamanho do card ao passar o mouse */
+            background-color: black; /* Muda a cor do card para preto ao passar o mouse */
+            color: white; /* Muda a cor da fonte para branco ao passar o mouse */
+        }
+
+        .event-details {
+            margin-top: 10px; /* Espaço entre o card e os detalhes */
+        }
+
+        .event-details span {
+            display: block; /* Exibe cada detalhe em uma nova linha */
+            font-size: 14px; /* Tamanho do texto */
+        }
+    </style>
+</head>
+<body>
+    <div id="bdt">
+        <div class="logo">G&C</div>
+        <div>
+            <a href="#home">Início</a>
+            <a href="#datas">Datas</a>
+            <a href="#fotos">Fotos</a>
+            <a href="#musicas">Músicas</a>
+            <a href="#mensagens">Mensagens</a>
+        </div>
+        <div class="linha"></div>
+    </div>
+
+    <div id="home" class="section">
+        <h1>Bem-vinda, Cristielle!</h1>
+    </div>
+
+    <div id="datas" class="section">
+        <h2>Datas</h2>
+        <div class="contador">
+            <h3 style="font-weight: bold; color: black;">Estamos juntos há:</h3>
+            <p id="relacionamento" style="color: black;">0 anos, 0 meses, 0 dias</p>
+        </div>
+
+        <div class="timeline">
+            <div class="card">
+                <h4>Primeiro Beijo</h4>
+                <div class="event-details">
+                    <span>Data: 01/08/2023</span>
+                </div>
+            </div>
+            <div class="card">
+                <h4>Primeiro Encontro</h4>
+                <div class="event-details">
+                    <span>Data: 15/07/2023</span>
+                </div>
+            </div>
+            <div class="card">
+                <h4>Primeiro Eu Te Amo</h4>
+                <div class="event-details">
+                    <span>Data: 20/09/2023</span>
+                </div>
+            </div>
+            <div class="card">
+                <h4>Primeira Viagem</h4>
+                <div class="event-details">
+                    <span>Data: 10/10/2023</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="fotos" class="section">
+        <h2>Fotos</h2>
+    </div>
+
+    <div id="musicas" class="section">
+        <h2>Músicas</h2>
+    </div>
+
+    <div id="mensagens" class="section">
+        <h2>Mensagens</h2>
+    </div>
+
+    <script>
+        function calcularTempoDesde(dataInicial) {
+            const hoje = new Date();
+            const inicio = new Date(dataInicial);
+            const diff = hoje - inicio;
+            const anos = hoje.getFullYear() - inicio.getFullYear();
+            const meses = hoje.getMonth() - inicio.getMonth();
+            const dias = hoje.getDate() - inicio.getDate();
+            const ajusteMes = meses < 0 ? -1 : 0;
+            const ajusteDia = dias < 0 ? -1 : 0;
+
+            return {
+                anos: anos + ajusteMes,
+                meses: (meses + 12) % 12,
+                dias: (dias + new Date(hoje.getFullYear(), hoje.getMonth(), 0).getDate()) % new Date(hoje.getFullYear(), hoje.getMonth(), 0).getDate()
+            };
+        }
+
+        function atualizarContador() {
+            const resultado = calcularTempoDesde('2023-07-01');
+            document.getElementById('relacionamento').innerText = `${resultado.anos} anos, ${resultado.meses} meses, ${resultado.dias} dias`;
+        }
+
+        atualizarContador();
+        setInterval(atualizarContador, 86400000);
+
+        window.addEventListener('scroll', function() {
+            const bdt = document.getElementById('bdt');
+            bdt.style.backgroundColor = window.scrollY > 0 ? 'black' : 'rgba(0, 0, 0, 0)';
+
+            const sections = ['home', 'datas', 'fotos', 'musicas', 'mensagens'];
+            const linha = document.querySelector('.linha');
+            sections.forEach(section => {
+                const elem = document.getElementById(section);
+                const link = document.querySelector(`#bdt a[href="#${section}"]`);
+                if (elem.getBoundingClientRect().top < window.innerHeight && elem.getBoundingClientRect().bottom > 0) {
+                    const linkRect = link.getBoundingClientRect();
+                    linha.style.left = `${linkRect.left}px`;
+                    linha.style.width = `${linkRect.width}px`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
