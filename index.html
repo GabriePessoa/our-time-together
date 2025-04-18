@@ -85,45 +85,107 @@
         }
 
         .section {
-            height: 100vh;
+            min-height: 100vh;
             background-color: white;
             text-align: center; 
+            padding: 80px 20px 20px;
+            color: #333;
         }
 
+        /* --- NOVA TIMELINE --- */
         .timeline {
-            display: flex;
-            justify-content: center;
-            margin: 40px 0; /* Espaço acima e abaixo da linha do tempo */
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 3px;
+            background: linear-gradient(to bottom, #c5e1a5, #81c784, #4caf50);
+            transform: translateX(-50%);
         }
 
         .card {
-            background-color: #c5e1a5; /* Mesma cor do contador */
-            border-radius: 10px;
-            width: 120px; /* Largura dos cards */
-            height: 200px; /* Altura dos cards */
-            margin: 0 20px; /* Espaçamento entre os cards */
-            padding: 10px;
-            position: relative; /* Para o posicionamento do semicírculo */
-            color: black; /* Cor da fonte preta para os cards */
-            transition: transform 0.3s, background-color 0.3s, color 0.3s; /* Efeito de transição */
+            position: relative;
+            width: 45%;
+            padding: 20px;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:nth-child(odd) {
+            left: 0;
+        }
+
+        .card:nth-child(even) {
+            left: 55%;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4caf50;
+            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2);
+        }
+
+        .card:nth-child(odd)::before {
+            right: -30px;
+        }
+
+        .card:nth-child(even)::before {
+            left: -30px;
         }
 
         .card:hover {
-            transform: scale(1.05); /* Aumenta o tamanho do card ao passar o mouse */
-            background-color: black; /* Muda a cor do card para preto ao passar o mouse */
-            color: white; /* Muda a cor da fonte para branco ao passar o mouse */
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
 
-        .event-details {
-            margin-top: 10px; /* Espaço entre o card e os detalhes */
+        .card h4 {
+            margin: 0 0 10px;
+            color: #333;
+            font-size: 18px;
         }
 
         .event-details span {
-            display: block; /* Exibe cada detalhe em uma nova linha */
-            font-size: 14px; /* Tamanho do texto */
+            display: block;
+            color: #666;
+            font-size: 14px;
         }
 
-        /* Novo estilo para o player do Spotify */
+        .card:hover h4, .card:hover .event-details span {
+            color: #4caf50;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+            .card {
+                width: 85%;
+                left: 0 !important;
+            }
+            .card::before {
+                left: -17px !important;
+            }
+        }
+
+        /* Player do Spotify */
         .spotify-player {
             margin: 30px auto;
             max-width: 600px;
@@ -151,7 +213,7 @@
     </div>
 
     <div id="datas" class="section">
-        <h2>Datas</h2>
+        <h2>Datas Especiais</h2>
         <div class="contador">
             <h3 style="font-weight: bold; color: black;">Estamos juntos há:</h3>
             <p id="relacionamento" style="color: black;">0 anos, 0 meses, 0 dias</p>
@@ -161,37 +223,40 @@
             <div class="card">
                 <h4>Primeiro Beijo</h4>
                 <div class="event-details">
-                    <span>Data: 01/08/2023</span>
+                    <span>01/08/2023</span>
+                    <span>🌙 À luz do luar</span>
                 </div>
             </div>
             <div class="card">
                 <h4>Primeiro Encontro</h4>
                 <div class="event-details">
-                    <span>Data: 15/07/2023</span>
+                    <span>15/07/2023</span>
+                    <span>☕ Café na praça</span>
                 </div>
             </div>
             <div class="card">
-                <h4>Primeiro Eu Te Amo</h4>
+                <h4>Primeiro "Eu Te Amo"</h4>
                 <div class="event-details">
-                    <span>Data: 20/09/2023</span>
+                    <span>20/09/2023</span>
+                    <span>💘 Inesquecível</span>
                 </div>
             </div>
             <div class="card">
                 <h4>Primeira Viagem</h4>
                 <div class="event-details">
-                    <span>Data: 10/10/2023</span>
+                    <span>10/10/2023</span>
+                    <span>🌊 Praia dos sonhos</span>
                 </div>
             </div>
         </div>
     </div>
 
     <div id="fotos" class="section">
-        <h2>Fotos</h2>
+        <h2>Nossas Fotos</h2>
     </div>
 
     <div id="musicas" class="section">
-        <h2>Músicas</h2>
-        <!-- Player do Spotify - Substitua o link pela sua playlist -->
+        <h2>Nossas Músicas</h2>
         <div class="spotify-player">
             <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4WYpdgoIcn6" 
                     width="100%" 
@@ -212,27 +277,27 @@
         function calcularTempoDesde(dataInicial) {
             const hoje = new Date();
             const inicio = new Date(dataInicial);
-            const diff = hoje - inicio;
-            const anos = hoje.getFullYear() - inicio.getFullYear();
-            const meses = hoje.getMonth() - inicio.getMonth();
-            const dias = hoje.getDate() - inicio.getDate();
-            const ajusteMes = meses < 0 ? -1 : 0;
-            const ajusteDia = dias < 0 ? -1 : 0;
+            
+            let anos = hoje.getFullYear() - inicio.getFullYear();
+            let meses = hoje.getMonth() - inicio.getMonth();
+            let dias = hoje.getDate() - inicio.getDate();
 
-            return {
-                anos: anos + ajusteMes,
-                meses: (meses + 12) % 12,
-                dias: (dias + new Date(hoje.getFullYear(), hoje.getMonth(), 0).getDate()) % new Date(hoje.getFullYear(), hoje.getMonth(), 0).getDate()
-            };
+            if (dias < 0) {
+                meses--;
+                dias += new Date(hoje.getFullYear(), hoje.getMonth(), 0).getDate();
+            }
+            if (meses < 0) {
+                anos--;
+                meses += 12;
+            }
+
+            return { anos, meses, dias };
         }
 
         function atualizarContador() {
             const resultado = calcularTempoDesde('2023-07-01');
             document.getElementById('relacionamento').innerText = `${resultado.anos} anos, ${resultado.meses} meses, ${resultado.dias} dias`;
         }
-
-        atualizarContador();
-        setInterval(atualizarContador, 86400000);
 
         window.addEventListener('scroll', function() {
             const bdt = document.getElementById('bdt');
@@ -243,12 +308,17 @@
             sections.forEach(section => {
                 const elem = document.getElementById(section);
                 const link = document.querySelector(`#bdt a[href="#${section}"]`);
-                if (elem.getBoundingClientRect().top < window.innerHeight && elem.getBoundingClientRect().bottom > 0) {
+                if (elem.getBoundingClientRect().top < window.innerHeight / 2 && elem.getBoundingClientRect().bottom > innerHeight / 2) {
                     const linkRect = link.getBoundingClientRect();
                     linha.style.left = `${linkRect.left}px`;
                     linha.style.width = `${linkRect.width}px`;
                 }
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            atualizarContador();
+            setInterval(atualizarContador, 86400000);
         });
     </script>
 </body>
